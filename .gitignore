@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+#Add nextjs gitignore
+# Next.js
+.next
+out
+node_modules
+.env
+.DS_Store

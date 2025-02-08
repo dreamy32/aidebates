@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
@@ -12,6 +13,12 @@ export default {
         success: '#28A745',
         warning: '#FF8800',
         error: '#E63946',
+        //custom colors
+        'deutzia-white': '#F7FAFC',
+        'pallid-blue': '#AAD8FF',
+        "cerulean-blue": '#2792FD',
+        "dusky-blue-violet": '#1D3557',
+        "deep-cadet-blue" : '#4A6FA5'
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
