@@ -5,31 +5,42 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Light theme colors */
+    --background: #F7FAFC;
+    --card-background: #FFFFFF;
+    --text: #1D3557;
+    --text-secondary: #4A6FA5;
+    --accent: #2792FD;
+    --border: #AAD8FF;
+  }
+
+  :root.dark {
+    /* Dark theme colors */
+    --background: #121212;
+    --card-background: #1E1E1E;
+    --text: #F7FAFC;
+    --text-secondary: #AAB3C1;
+    --accent: #2792FD;
+    --border: #2A2A2A;
+  }
+
   body {
-    @apply bg-[#F7FAFC] text-[#1D3557] font-inter;
+    @apply bg-bg-primary text-text-primary;
   }
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  @apply bg-white;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-[#2792FD]/50 rounded-full hover:bg-[#2792FD]/70 transition-colors;
-}
-
-/* Animations */
-@keyframes glow {
-  0% {
-    box-shadow: 0 0 5px rgba(0, 122, 255, 0.2);
+@layer components {
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
   }
-  100% {
-    box-shadow: 0 0 20px rgba(0, 122, 255, 0.4);
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
   }
 }
