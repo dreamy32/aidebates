@@ -10,7 +10,7 @@ interface DebateOverviewProps {
 }
 
 export default function DebateOverview({ responses }: DebateOverviewProps) {
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const getAIModel = (modelId: string): AIModel | undefined => {
     return mockAIModels.find(model => model.id === modelId);

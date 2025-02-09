@@ -84,7 +84,7 @@ export default function DebateContent({ debate }: { debate: Debate }) {
           return (
             <div
               key={response.id}
-              className={`p-6 ${activeResponse === response.id ? 'block' : 'hidden'} bg-[#EAF5FF] dark:bg-background`}
+              className={`p-6 ${activeResponse === response.id ? 'block' : 'hidden'} bg-[#EAF5FF] dark:bg-background rounded-xl`}
             >
               {/* Response Header */}
               <div className="flex items-center justify-between mb-4">
