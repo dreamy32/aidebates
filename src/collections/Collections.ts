@@ -1,6 +1,6 @@
 import { AiResponse, Debate } from '@/payload-types';
 import { revalidatePath } from 'next/cache';
-import { CollectionAfterChangeHook, CollectionBeforeChangeHook, CollectionConfig } from 'payload';
+import { CollectionAfterChangeHook, CollectionAfterDeleteHook, CollectionBeforeChangeHook, CollectionConfig } from 'payload';
 
 const setCustomTitle: CollectionBeforeChangeHook<AiResponse> = async ({ req, data, originalDoc }) => {
   // Get the aiModel value from the new data or original doc.
@@ -27,7 +27,13 @@ const revalidateOnChange: CollectionAfterChangeHook<Debate> = async ({
 }) => { 
   // revalidatePath(`/debate/${doc.slug}`);
   revalidatePath('/debates');
- }
+}
+
+const revalidateOnDelete: CollectionAfterDeleteHook<Debate> = async ({
+  doc
+}) => { 
+  revalidatePath('/debates');
+}
 
 export const Debates: CollectionConfig = {
   slug: 'debates',
@@ -36,6 +42,7 @@ export const Debates: CollectionConfig = {
   },
   hooks: {
     afterChange: [revalidateOnChange],
+    afterDelete: [revalidateOnDelete],
   },
   fields: [
     {
