@@ -23,5 +23,11 @@ dist-ssr
 *.sln
 *.sw?
 
-# nextjs ignore everything
-.next*
+#Add nextjs gitignore
+# Next.js
+.next
+out
+node_modules
+.env
+.DS_Store
+.vercel

@@ -6,41 +6,59 @@
 
 @layer base {
   :root {
-    /* Light theme colors */
-    --background: #F7FAFC;
-    --card-background: #FFFFFF;
-    --text: #1D3557;
-    --text-secondary: #4A6FA5;
-    --accent: #2792FD;
-    --border: #AAD8FF;
+    /* Light mode colors */
+    --deutzia-white: #F7FAFC;
+    --pallid-blue: #AAD8FF;
+    --mazarine-blue: #75B4FF;
+    --cerulean-blue: #2792FD;
+    --pale-camp-blue: #D0D8E6;
+    --dusky-blue-violet: #1D3557;
+    --deep-cadet-blue: #4A6FA5;
+    /* Dark mode colors */
+    /* Preassign light mode colors to element variables color */
+    /* Color variables */
+    --primary: var(--cerulean-blue);
+    --background: var(--deutzia-white);
+    --border: var(--pallid-blue);
+    --text: var(--dusky-blue-violet);
+    --placeholder-text: var(--deep-cadet-blue);
   }
-
   :root.dark {
-    /* Dark theme colors */
-    --background: #121212;
-    --card-background: #1E1E1E;
-    --text: #F7FAFC;
-    --text-secondary: #AAB3C1;
-    --accent: #2792FD;
-    --border: #2A2A2A;
-  }
-
-  body {
-    @apply bg-bg-primary text-text-primary;
+    /* Dark mode colors */
+    /* Color variables */
+    --background: #0A192F;
+    --border: #1E3A8A;
+    --text: #E2E8F0;
+    --placeholder-text: #94A3B8;
   }
 }
 
-@layer components {
-  /* Custom Scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
+@layer base {
+  body {
+    @apply bg-background text-text font-inter;
   }
+}
 
-  ::-webkit-scrollbar-track {
-    background-color: transparent;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-white;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-[#2792FD]/50 rounded-full hover:bg-[#2792FD]/70 transition-colors;
+}
+
+/* Animations */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(0, 122, 255, 0.2);
   }
-
-  ::-webkit-scrollbar-thumb {
-    @apply bg-border rounded-full;
+  100% {
+    box-shadow: 0 0 20px rgba(0, 122, 255, 0.4);
   }
 }
