@@ -41,7 +41,7 @@ export default async function DebatesPage() {
         {/* Debates Grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {myDebates.docs.map(d => {
-            const creator = d.createdBy;
+            const displayedName = typeof d.createdBy === 'string' ? 'Unknown User' : d.createdBy.username;
             return (
               <Link 
                 key={d.id} 
@@ -61,8 +61,7 @@ export default async function DebatesPage() {
                   <div className="flex items-center text-small">
                     <User className="w-4 h-4 text-placeholder mr-2" />
                     <span className="text-placeholder">
-                      {/* {creator?.firstName} {creator?.lastName} */}
-                      John Doe
+                      @{displayedName}
                     </span>
                   </div>
 
@@ -79,7 +78,7 @@ export default async function DebatesPage() {
                     {d.tags?.slice(0, 3).map((tag, index) => (
                       <span
                         key={index}
-                        className="inline-flex items-center px-2 py-1 rounded-full text-small font-medium bg-primary/10 text-primary"
+                        className="capitalize inline-flex items-center px-2 py-1 rounded-full text-small font-medium bg-primary/10 text-primary"
                       >
                         <Tag className="w-3 h-3 mr-1" />
                         {tag.tag}
