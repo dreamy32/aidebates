@@ -5,7 +5,7 @@ import { DeepseekIcon, QwenIcon } from '@/components/icons';
 export type ModelIconType = 'openai' | 'anthropic' | 'bot' | 'deepseek' | 'qwen';
 
 interface ModelIconProps {
-  type: ModelIconType;
+  type: ModelIconType | string;
   className?: string;
 }
 
@@ -18,6 +18,7 @@ export function ModelIcon({ type, className = "w-5 h-5" }: ModelIconProps) {
     case 'deepseek':
       return <DeepseekIcon className={className} />;
     case 'qwen':
+    case 'alibabacloud':
       return <QwenIcon className={className} />;
     case 'bot':
     default:

@@ -1,30 +1,42 @@
 import { Bot, Calendar, Tag, User, Search, Home, BookOpen, Info } from 'lucide-react';
-import { mockDebates, mockUsers, mockAIResponses } from '@/lib/mockData';
+// import { mockDebates, mockUsers, mockAIResponses } from '@/lib/mockData';
 import DebateContent from '@/components/DebateContent';
 import DebateOverview from '@/components/DebateOverview';
 import NavLink from '@/components/NavLink';
 import DetailItem from '@/components/DetailItem';
 import { notFound } from 'next/navigation';
+import { getPayload } from 'payload';
+import payloadConfig from '@/payload.config';
+import { AiResponse } from '@/payload-types';
 
 interface params {
   params: Promise<{ slug: string }>;
 }
-export default async  function DebatePage({ params }: params) {
-  const {slug} = await params;
-  const debate = mockDebates.find(d => d.slug === slug);
-  
+export default async function DebatePage({ params }: params) {
+  const { slug } = await params;
+
+
+  // const responses = mockAIResponses.filter(response =>
+  //   debate.aiResponses.includes(response.id)
+  // );
+
+  // const getUser = (userId: string) => {
+  //   return mockUsers.find(user => user.id === userId);
+  // };
+  const payload = await getPayload({ config: payloadConfig })
+  const getDebate = (await payload.find({
+    collection: 'debates',
+    limit: 1,
+    where: {
+      slug: {
+        equals: slug
+      }
+    }
+  })).docs[0];
+  const debate = getDebate;
   if (!debate) {
     notFound();
   }
-
-  const responses = mockAIResponses.filter(response => 
-    debate.aiResponses.includes(response.id)
-  );
-
-  const getUser = (userId: string) => {
-    return mockUsers.find(user => user.id === userId);
-  };
-
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -32,7 +44,7 @@ export default async  function DebatePage({ params }: params) {
       day: 'numeric'
     });
   };
-
+  const USER = debate.createdBy;
   return (
     <div className="min-h-screen">
       {/* Main Content */}
@@ -49,21 +61,20 @@ export default async  function DebatePage({ params }: params) {
             </div>
 
             {/* Global Overview */}
-            <DebateOverview responses={responses} />
-
+            {debate.aiResponses && <DebateOverview responses={(debate.aiResponses).filter(response => typeof response !== 'string') as AiResponse[]} />}
             {/* AI Response Section */}
-            <DebateContent debate={debate} />
+            {debate.aiResponses && <DebateContent debate={debate} />}
           </div>
 
           {/* Right Column - Sidebar */}
           <div className="w-full lg:w-1/4 max-w-full sm:max-w-sidebar">
             <div className="bg-white dark:bg-text/5 rounded-xl border border-border p-4 sm:p-6 shadow-sm">
               <h2 className="text-subtitle font-semibold mb-4 sm:mb-6 text-text">Debate Details</h2>
-              
+
               {/* Creator */}
               <DetailItem
                 icon={<User className="w-4 h-4 sm:w-5 sm:h-5" />}
-                title={`${getUser(debate.createdBy)?.firstName} ${getUser(debate.createdBy)?.lastName}`}
+                title={typeof USER === 'object' && USER.username ? '@' + USER.username : 'Unknown User'}
                 subtitle="Creator"
               />
 
@@ -81,10 +92,10 @@ export default async  function DebatePage({ params }: params) {
                   <span className="text-xs sm:text-small font-medium">Tags</span>
                 </div>
                 <div className="flex flex-wrap gap-1 sm:gap-2">
-                  {debate.tags.map((tag, index) => (
+                  {debate.tags && debate.tags.map((tag, index) => (
                     <span
                       key={index}
-                      className="inline-flex items-center px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-small font-medium bg-primary/10 text-primary border border-primary/30"
+                      className="capitalize inline-flex items-center px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-small font-medium bg-primary/10 text-primary border border-primary/30"
                     >
                       {tag.tag}
                     </span>
@@ -93,11 +104,19 @@ export default async  function DebatePage({ params }: params) {
               </div>
 
               {/* Predicted Event Date */}
-              <DetailItem
+              {/* <DetailItem
                 icon={<Calendar className="w-4 h-4 sm:w-5 sm:h-5" />}
-                title={formatDate(debate.predictedEventDate)}
+                title={formatDate(debate.predictedEventDate || '')}
                 subtitle="Predicted Event Date"
-              />
+              /> */}
+
+              {/* Verified Debate by moderation */}
+              {debate.verified &&
+                <DetailItem
+                  icon={<Info className="w-4 h-4 sm:w-5 sm:h-5" />}
+                  title="Verified Debate"
+                  subtitle="Verified by Moderation"
+                />}
             </div>
           </div>
         </div>

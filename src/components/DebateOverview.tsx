@@ -2,19 +2,16 @@
 
 import { useState } from 'react';
 import { ChevronDown, ChevronUp, Bot, Lightbulb } from 'lucide-react';
-import type { AIResponse, AIModel } from '@/lib/types';
-import { mockAIModels } from '@/lib/mockData';
+import type { AIModel } from '@/lib/types';
+// import { mockAIModels } from '@/lib/mockData';
+import { AiResponse } from '@/payload-types';
 
 interface DebateOverviewProps {
-  responses: AIResponse[];
+  responses: AiResponse[];
 }
 
 export default function DebateOverview({ responses }: DebateOverviewProps) {
   const [isExpanded, setIsExpanded] = useState(false);
-
-  const getAIModel = (modelId: string): AIModel | undefined => {
-    return mockAIModels.find(model => model.id === modelId);
-  };
 
   // Analyze responses to find agreements and differences
   const analyzeResponses = () => {
@@ -30,34 +27,34 @@ export default function DebateOverview({ responses }: DebateOverviewProps) {
 
     // Extract key points from each response
     const responseTexts = responses.map(response => {
-      const text = response.answerReceived[0]?.type === 'markdown'
-        ? response.answerReceived[0]?.text || ''
-        : response.answerReceived[0]?.children?.[0]?.text || '';
-
+      // const text = response.answerReceived[0]?.type === 'markdown'
+      const text = response.answerReceived;
       return {
-        model: getAIModel(response.aiModel)?.modelName || 'AI Model',
+        model: response.aiModel || 'AI Model',
         text
       };
     });
 
     // Simple analysis based on common keywords and phrases
     responseTexts.forEach(response => {
+      const name = typeof response.model === 'string' ? response.model : response.model.modelName;
+      // console.log(response.text);
       if (response.text.toLowerCase().includes('agree') || 
           response.text.toLowerCase().includes('likely')) {
-        analysis.agreements.add(response.model);
+        analysis.agreements.add(name);
       }
       if (response.text.toLowerCase().includes('however') || 
           response.text.toLowerCase().includes('but') ||
           response.text.toLowerCase().includes('although')) {
-        analysis.differences.add(response.model);
+        analysis.differences.add(name);
       }
       if (response.text.toLowerCase().includes('unique') || 
           response.text.toLowerCase().includes('specifically') ||
           response.text.toLowerCase().includes('notably')) {
-        analysis.uniqueInsights.add(response.model);
+        analysis.uniqueInsights.add(name);
       }
     });
-
+    console.log(analysis);
     return analysis;
   };
 

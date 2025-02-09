@@ -1,8 +1,10 @@
 import { Bot, Calendar, Tag, User, Search } from 'lucide-react';
-import { mockDebates, mockUsers } from '@/lib/mockData';
+// import { mockDebates, mockUsers } from '@/lib/mockData';
 import Link from 'next/link';
+import payloadConfig from '@/payload.config';
+import { getPayload } from 'payload';
 
-export default function DebatesPage() {
+export default async function DebatesPage() {
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -10,10 +12,14 @@ export default function DebatesPage() {
       day: 'numeric'
     });
   };
-
-  const getUser = (userId: string) => {
-    return mockUsers.find(user => user.id === userId);
-  };
+  const payload = await getPayload({ config: payloadConfig })
+  const myDebates = await payload.find({
+    collection: 'debates',  
+  });
+  // con
+  // const getUser = (userId: string) => {
+  //   return mockUsers.find(user => user.id === userId);
+  // };
 
   return (
     <div className="min-h-screen">
@@ -34,19 +40,19 @@ export default function DebatesPage() {
 
         {/* Debates Grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {mockDebates.map(debate => {
-            const creator = getUser(debate.createdBy);
+          {myDebates.docs.map(d => {
+            const creator = d.createdBy;
             return (
               <Link 
-                key={debate.id} 
-                href={`/debate/${debate.slug}`}
+                key={d.id} 
+                href={`/debate/${d.slug}`}
                 className="bg-white dark:bg-text/5 rounded-xl border border-border p-6 shadow-sm hover:shadow-md transition-all hover:translate-y-[-2px]"
               >
                 <h2 className="text-subtitle font-semibold mb-4 text-text">
-                  {debate.title}
+                  {d.title}
                 </h2>
                 <p className="text-placeholder mb-6 line-clamp-3">
-                  {debate.prompt}
+                  {d.prompt}
                 </p>
                 
                 {/* Meta Information */}
@@ -55,7 +61,8 @@ export default function DebatesPage() {
                   <div className="flex items-center text-small">
                     <User className="w-4 h-4 text-placeholder mr-2" />
                     <span className="text-placeholder">
-                      {creator?.firstName} {creator?.lastName}
+                      {/* {creator?.firstName} {creator?.lastName} */}
+                      John Doe
                     </span>
                   </div>
 
@@ -63,13 +70,13 @@ export default function DebatesPage() {
                   <div className="flex items-center text-small">
                     <Calendar className="w-4 h-4 text-placeholder mr-2" />
                     <span className="text-placeholder">
-                      {formatDate(debate.createdAt)}
+                      {formatDate(d.createdAt)}
                     </span>
                   </div>
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2">
-                    {debate.tags.slice(0, 3).map((tag, index) => (
+                    {d.tags?.slice(0, 3).map((tag, index) => (
                       <span
                         key={index}
                         className="inline-flex items-center px-2 py-1 rounded-full text-small font-medium bg-primary/10 text-primary"

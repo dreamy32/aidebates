@@ -48,7 +48,7 @@ export default function RootLayout({
 
                   {/* Auth Buttons - Show these when user is NOT logged in */}
                   <a
-                    href="/login"
+                    href="/admin/login"
                     className="flex items-center space-x-2 text-[18px] font-medium transition-colors relative text-text hover:text-primary after:absolute after:bottom-[-2px] after:left-0 after:right-0 after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform"
                   >
                     <LogIn className="w-4 h-4" />

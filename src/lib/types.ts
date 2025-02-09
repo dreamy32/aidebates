@@ -19,20 +19,20 @@ export interface Debate {
   realOutcome: string | null;
 }
 
-export interface AIResponse {
-  id: string;
-  associatedDebate: string;
-  aiModel: string;
-  webSearchEnabled: boolean;
-  temperature: number;
-  dateOfResponse: string;
-  answerReceived: Array<{
-    type: string;
-    children?: { text: string }[];
-    text?: string;
-  }>;
-  customTitle: string;
-}
+// export interface AIResponse {
+//   id: string;
+//   associatedDebate: string;
+//   aiModel: string;
+//   webSearchEnabled: boolean;
+//   temperature: number;
+//   dateOfResponse: string;
+//   answerReceived: Array<{
+//     type: string;
+//     children?: { text: string }[];
+//     text?: string;
+//   }>;
+//   customTitle: string;
+// }
 
 export interface AIModel {
   id: string;
