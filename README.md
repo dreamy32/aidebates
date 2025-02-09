@@ -5,7 +5,7 @@ A platform for comparing responses from different large language models (LLMs) o
 <div align="center">
   <a href="https://github.com/dreamy32/aidebates/stargazers"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/dreamy32/aidebates"></a>
   <a href="https://bsky.app/profile/drseek32.bsky.social"><img alt="Bluesky Follow" src="https://img.shields.io/twitter/follow/drseek32?logo=bluesky"></a>
-  <a href="https://github.com/dreamy32/aidebates/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/License-CC%20BY--NC--ND-yellow"></a>
+  <a href="https://github.com/dreamy32/aidebates/blob/main/LICENSE.txt"><img alt="License" src="https://img.shields.io/badge/License-CC%20BY--NC--ND-yellow"></a>
 </div>
 
 ## ⚡ Live
