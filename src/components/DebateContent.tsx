@@ -62,12 +62,13 @@ export default function DebateContent({ debate }: { debate: Debate }) {
                   ? 'border-primary text-primary'
                   : 'border-transparent text-placeholder hover:text-text hover:border-border'
                   }`}
+                title={modelName}
               >
                 <ModelIcon
                   type={typeof model === "object" && model.provider.toLowerCase().replace(/\s/g, '') || 'bot'}
                   className="w-5 h-5 mr-2" />
                 {/* <ModelIcon type={false || 'bot'} className="w-5 h-5 mr-2" /> */}
-                <span className="font-medium">{modelName}</span>
+                <span className="font-medium truncate max-w-[15ch]">{modelName}</span>
               </button>
             );
           })}
@@ -123,12 +124,12 @@ export default function DebateContent({ debate }: { debate: Debate }) {
                   {isMarkdown ? (
                     <ReactMarkdown
                       remarkPlugins={[remarkGfm]}
-                      className="prose prose-blue max-w-none"
+                      className="prose prose-blue max-w-none text-text"
                       components={{
-                        h1: ({ node, ...props }) => <h1 className="text-2xl font-bold mt-6 mb-4 text-text" {...props} />,
-                        h2: ({ node, ...props }) => <h2 className="text-xl font-bold mt-5 mb-3 text-text" {...props} />,
-                        h3: ({ node, ...props }) => <h3 className="text-lg font-bold mt-4 mb-2 text-text" {...props} />,
-                        p: ({ node, ...props }) => <p className="mb-4 text-text" {...props} />,
+                        h1: ({ node, ...props }) => <h1 className="text-2xl font-bold mt-6 mb-4 " {...props} />,
+                        h2: ({ node, ...props }) => <h2 className="text-xl font-bold mt-5 mb-3" {...props} />,
+                        h3: ({ node, ...props }) => <h3 className="text-lg font-bold mt-4 mb-2" {...props} />,
+                        p: ({ node, ...props }) => <p className="mb-4" {...props} />,
                         ul: ({ node, ...props }) => <ul className="list-disc pl-6 mb-4" {...props} />,
                         ol: ({ node, ...props }) => <ol className="list-decimal pl-6 mb-4" {...props} />,
                         li: ({ node, ...props }) => <li className="mb-2" {...props} />,
@@ -142,7 +143,8 @@ export default function DebateContent({ debate }: { debate: Debate }) {
                             ? <code className="bg-primary/10 px-1.5 py-0.5 rounded text-primary font-mono text-sm" {...props} />
                             : <code className="block bg-primary/10 p-4 rounded-lg text-text font-mono text-sm my-4" {...props} />;
                         },
-                        strong: ({ node, ...props }) => <strong className="text-text dark:font-extrabold" {...props} />,
+                        strong: ({ node, ...props }) => 
+                        <strong className="text-text dark:font-[900] dark:shadow" {...props} />,
                       }}
                     >
                       {responseText}

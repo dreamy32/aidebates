@@ -33,7 +33,7 @@ export default async function DebatesPage() {
             <input
               type="text"
               placeholder="Search debates..."
-              className="w-full bg-background border border-border rounded-lg pl-12 pr-4 py-3 text-[18px] text-text placeholder-placeholder/70 focus:outline-none focus:border-[#2792FD] transition-colors"
+              className="w-full bg-background border border-border rounded-lg pl-12 pr-4 py-3 text-[18px] text-text placeholder-placeholder/70 focus:outline-none focus:border-primary transition-colors"
             />
           </div>
         </div>
