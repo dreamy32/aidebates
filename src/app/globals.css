@@ -5,8 +5,37 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Light mode colors */
+    --deutzia-white: #F7FAFC;
+    --pallid-blue: #AAD8FF;
+    --mazarine-blue: #75B4FF;
+    --cerulean-blue: #2792FD;
+    --pale-camp-blue: #D0D8E6;
+    --dusky-blue-violet: #1D3557;
+    --deep-cadet-blue: #4A6FA5;
+    /* Dark mode colors */
+    /* Preassign light mode colors to element variables color */
+    /* Color variables */
+    --primary: var(--cerulean-blue);
+    --background: var(--deutzia-white);
+    --border: var(--pallid-blue);
+    --text: var(--dusky-blue-violet);
+    --placeholder-text: var(--deep-cadet-blue);
+  }
+  :root.dark {
+    /* Dark mode colors */
+    /* Color variables */
+    --background: #0A192F;
+    --border: #1E3A8A;
+    --text: #E2E8F0;
+    --placeholder-text: #94A3B8;
+  }
+}
+
+@layer base {
   body {
-    @apply bg-[#F7FAFC] text-[#1D3557] font-inter;
+    @apply bg-background text-text font-inter;
   }
 }
 

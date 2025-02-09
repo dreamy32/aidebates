@@ -16,19 +16,18 @@ export default function DebatesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7FAFC]">
+    <div className="min-h-screen">
       {/* Main Content */}
       <main className="max-w-content mx-auto px-6 pt-28 pb-16">
-        <h1 className="text-title font-semibold text-[#1D3557] mb-8">AI Debates</h1>
-        
+        <h1 className="text-title font-semibold text-text mb-8">AI Debates</h1>
         {/* Search Bar */}
         <div className="max-w-[600px] mx-auto mb-12">
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#4A6FA5]" />
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-text" />
             <input
               type="text"
               placeholder="Search debates..."
-              className="w-full bg-[#F7FAFC] border border-[#AAD8FF] rounded-lg pl-12 pr-4 py-3 text-[18px] text-[#1D3557] placeholder-[#4A6FA5]/70 focus:outline-none focus:border-[#2792FD] transition-colors"
+              className="w-full bg-background border border-border rounded-lg pl-12 pr-4 py-3 text-[18px] text-text placeholder-placeholder/70 focus:outline-none focus:border-[#2792FD] transition-colors"
             />
           </div>
         </div>
@@ -41,12 +40,12 @@ export default function DebatesPage() {
               <Link 
                 key={debate.id} 
                 href={`/debate/${debate.slug}`}
-                className="bg-white rounded-xl border border-[#AAD8FF] p-6 shadow-sm hover:shadow-md transition-all hover:translate-y-[-2px]"
+                className="bg-white dark:bg-text/5 rounded-xl border border-border p-6 shadow-sm hover:shadow-md transition-all hover:translate-y-[-2px]"
               >
-                <h2 className="text-subtitle font-semibold mb-4 text-[#1D3557]">
+                <h2 className="text-subtitle font-semibold mb-4 text-text">
                   {debate.title}
                 </h2>
-                <p className="text-[#4A6FA5] mb-6 line-clamp-3">
+                <p className="text-placeholder mb-6 line-clamp-3">
                   {debate.prompt}
                 </p>
                 
@@ -54,16 +53,16 @@ export default function DebatesPage() {
                 <div className="space-y-4">
                   {/* Creator */}
                   <div className="flex items-center text-small">
-                    <User className="w-4 h-4 text-[#4A6FA5] mr-2" />
-                    <span className="text-[#4A6FA5]">
+                    <User className="w-4 h-4 text-placeholder mr-2" />
+                    <span className="text-placeholder">
                       {creator?.firstName} {creator?.lastName}
                     </span>
                   </div>
 
                   {/* Created Date */}
                   <div className="flex items-center text-small">
-                    <Calendar className="w-4 h-4 text-[#4A6FA5] mr-2" />
-                    <span className="text-[#4A6FA5]">
+                    <Calendar className="w-4 h-4 text-placeholder mr-2" />
+                    <span className="text-placeholder">
                       {formatDate(debate.createdAt)}
                     </span>
                   </div>
@@ -73,7 +72,7 @@ export default function DebatesPage() {
                     {debate.tags.slice(0, 3).map((tag, index) => (
                       <span
                         key={index}
-                        className="inline-flex items-center px-2 py-1 rounded-full text-small font-medium bg-[#2792FD]/10 text-[#2792FD]"
+                        className="inline-flex items-center px-2 py-1 rounded-full text-small font-medium bg-primary/10 text-primary"
                       >
                         <Tag className="w-3 h-3 mr-1" />
                         {tag.tag}

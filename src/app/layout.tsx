@@ -19,15 +19,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme='light'>
-          {/* Navbar */}
-          <nav className="fixed top-0 left-0 right-0 bg-deutzia-white border-b border-pallid-blue z-50">
+      <ThemeProvider attribute="class" enableSystem={false} >
+      {/* Navbar */}
+          <nav className="fixed top-0 left-0 right-0 bg-background border-b border-border z-50">
             <div className="max-w-content mx-auto px-6 h-18">
               <div className="flex items-center justify-between h-full">
                 <div className="flex items-center space-x-8">
-                  <a href="/" className="text-[#2792FD] hover:text-[#1D3557] transition-colors">
+                  <a href="/" className="text-cerulean-blue hover:text-dusky-blue-violet transition-colors">
                     <Bot className="w-8 h-8" />
                   </a>
                   <div className="hidden md:flex items-center space-x-6">
@@ -40,7 +40,7 @@ export default function RootLayout({
                   {/* Start a Debate CTA */}
                   <a
                     href="/debates/new"
-                    className="hidden md:flex items-center space-x-2 text-[18px] font-medium transition-colors relative text-[#1D3557] hover:text-[#2792FD] after:absolute after:bottom-[-2px] after:left-0 after:right-0 after:h-0.5 after:bg-[#2792FD] after:scale-x-0 hover:after:scale-x-100 after:transition-transform"
+                    className="hidden md:flex items-center space-x-2 text-[18px] font-medium transition-colors relative text-text hover:text-primary after:absolute after:bottom-[-2px] after:left-0 after:right-0 after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform"
                   >
                     <Plus className="w-4 h-4" />
                     <span>Start a Debate</span>
@@ -49,29 +49,30 @@ export default function RootLayout({
                   {/* Auth Buttons - Show these when user is NOT logged in */}
                   <a
                     href="/login"
-                    className="flex items-center space-x-2 text-[18px] font-medium transition-colors relative text-[#1D3557] hover:text-[#2792FD] after:absolute after:bottom-[-2px] after:left-0 after:right-0 after:h-0.5 after:bg-[#2792FD] after:scale-x-0 hover:after:scale-x-100 after:transition-transform"
+                    className="flex items-center space-x-2 text-[18px] font-medium transition-colors relative text-text hover:text-primary after:absolute after:bottom-[-2px] after:left-0 after:right-0 after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform"
                   >
                     <LogIn className="w-4 h-4" />
                     <span>Log in</span>
                   </a>
 
                   {/* Theme Toggle */}
-                <ThemeToggle />
+                  <ThemeToggle />
                 </div>
               </div>
             </div>
           </nav>
-
-          {children}
-
+          {/*  */}
+          <main>
+            {children}
+          </main>
           {/* Footer */}
-          <footer className="border-t border-[#AAD8FF] py-6 mt-16">
+          <footer className="border-t border-border py-6 mt-16">
             <div className="max-w-content mx-auto px-6">
-              <div className="flex flex-col md:flex-row justify-between items-center text-small text-[#4A6FA5]">
+              <div className="flex flex-col md:flex-row justify-between items-center text-small text-placeholder-text">
                 <div>© 2025 AI Model Comparison. All rights reserved.</div>
                 <div className="flex items-center space-x-6 mt-4 md:mt-0">
-                  <a href="/terms" className="hover:text-[#1D3557] transition-colors">Terms</a>
-                  <a href="/privacy" className="hover:text-[#1D3557] transition-colors">Privacy</a>
+                  <a href="/terms" className="hover:text-text transition-colors">Terms</a>
+                  <a href="/privacy" className="hover:text-text transition-colors">Privacy</a>
                   <span>Powered by Next.js</span>
                 </div>
               </div>

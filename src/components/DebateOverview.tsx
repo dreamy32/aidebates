@@ -70,19 +70,19 @@ export default function DebateOverview({ responses }: DebateOverviewProps) {
   return (
     <div className="mb-8 overflow-hidden animate-fadeIn">
       {isExpanded ? (
-        <div className="rounded-xl border-3 border-[#2792FD] overflow-hidden shadow-[0_4px_24px_rgba(170,216,255,0.3)] transition-all">
+        <div className="rounded-xl border-3 border-primary overflow-hidden shadow-[0_4px_24px_rgba(170,216,255,0.3)] transition-all">
           {/* Header */}
-          <div className="bg-gradient-to-r from-[#AAD8FF] to-[#75B4FF] px-8 py-6">
+          <div className="bg-gradient-to-r from-pallid-blue to-mazarine-blue dark:to-dusky-blue-violet dark:from-background px-8 py-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
-                <div className="bg-white/90 rounded-lg p-2">
-                  <Lightbulb className="w-6 h-6 text-[#2792FD]" />
+                <div className="bg-white/90 dark:bg-transparent dark:ring-2 rounded-lg p-2">
+                  <Lightbulb className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h2 className="text-[22px] font-bold text-[#1D3557]">
+                  <h2 className="text-[22px] font-bold text-text">
                     AI Consensus & Differences
                   </h2>
-                  <p className="text-[#1D3557]/80 text-[16px]">
+                  <p className="text-text/80 text-[16px]">
                     Key takeaways from all AI responses
                   </p>
                 </div>
@@ -92,13 +92,13 @@ export default function DebateOverview({ responses }: DebateOverviewProps) {
                 className="p-2 hover:bg-white/20 rounded-lg transition-colors"
                 aria-label="Collapse overview"
               >
-                <ChevronUp className="w-5 h-5 text-[#1D3557]" />
+                <ChevronUp className="w-5 h-5 text-text" />
               </button>
             </div>
           </div>
 
           {/* Content */}
-          <div className="bg-white p-8 space-y-6">
+          <div className="bg-background p-8 space-y-6">
             {/* General Consensus */}
             {analysis.agreements.size > 0 && (
               <div className="space-y-3">
@@ -106,11 +106,11 @@ export default function DebateOverview({ responses }: DebateOverviewProps) {
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#28A745]/10 text-[#28A745]">
                     ✓
                   </span>
-                  <h3 className="text-[20px] font-semibold text-[#1D3557]">
+                  <h3 className="text-[20px] font-semibold text-text">
                     General Agreement
                   </h3>
                 </div>
-                <p className="text-[18px] leading-relaxed text-[#4A6FA5] pl-11">
+                <p className="text-[18px] leading-relaxed text-placeholder pl-11">
                   {Array.from(analysis.agreements).join(', ')} show similar perspectives on key points.
                 </p>
               </div>
@@ -123,11 +123,11 @@ export default function DebateOverview({ responses }: DebateOverviewProps) {
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#FF8800]/10 text-[#FF8800]">
                     ⚠️
                   </span>
-                  <h3 className="text-[20px] font-semibold text-[#1D3557]">
+                  <h3 className="text-[20px] font-semibold text-text">
                     Key Differences
                   </h3>
                 </div>
-                <p className="text-[18px] leading-relaxed text-[#4A6FA5] pl-11">
+                <p className="text-[18px] leading-relaxed text-placeholder pl-11">
                   {Array.from(analysis.differences).join(', ')} present different viewpoints or considerations.
                 </p>
               </div>
@@ -137,24 +137,24 @@ export default function DebateOverview({ responses }: DebateOverviewProps) {
             {analysis.uniqueInsights.size > 0 && (
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
-                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#2792FD]/10 text-[#2792FD]">
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary">
                     🔍
                   </span>
-                  <h3 className="text-[20px] font-semibold text-[#1D3557]">
+                  <h3 className="text-[20px] font-semibold text-text">
                     Unique Insights
                   </h3>
                 </div>
-                <p className="text-[18px] leading-relaxed text-[#4A6FA5] pl-11">
+                <p className="text-[18px] leading-relaxed text-placeholder pl-11">
                   {Array.from(analysis.uniqueInsights).join(', ')} provide additional unique perspectives.
                 </p>
               </div>
             )}
 
             {/* Generated Label */}
-            <div className="pt-6 border-t border-[#AAD8FF]">
+            <div className="pt-6 border-t border-border">
               <div className="flex items-center space-x-2">
-                <Bot className="w-4 h-4 text-[#4A6FA5]" />
-                <p className="text-small text-[#4A6FA5]">
+                <Bot className="w-4 h-4 text-placeholder" />
+                <p className="text-small text-placeholder">
                   This overview is automatically generated based on AI responses
                 </p>
               </div>
@@ -164,7 +164,7 @@ export default function DebateOverview({ responses }: DebateOverviewProps) {
       ) : (
         <button
           onClick={() => setIsExpanded(true)}
-          className="w-full bg-white rounded-xl border-3 border-[#2792FD] px-6 py-4 flex items-center justify-center space-x-2 text-[#2792FD] hover:bg-[#2792FD]/5 transition-colors"
+          className="w-full bg-background rounded-xl border-3 border-primary px-6 py-4 flex items-center justify-center space-x-2 text-primary hover:bg-primary/5 transition-colors"
         >
           <Lightbulb className="w-5 h-5" />
           <span className="font-semibold">View AI Takeaways</span>

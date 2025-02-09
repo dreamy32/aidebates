@@ -14,11 +14,19 @@ export default {
         warning: '#FF8800',
         error: '#E63946',
         //custom colors
-        'deutzia-white': '#F7FAFC',
-        'pallid-blue': '#AAD8FF',
-        "cerulean-blue": '#2792FD',
-        "dusky-blue-violet": '#1D3557',
-        "deep-cadet-blue" : '#4A6FA5'
+        'deutzia-white': 'var(--deutzia-white)',
+        'pallid-blue': 'var(--pallid-blue)',
+        'mazarine-blue': 'var(--mazarine-blue)',
+        'pale-camp-blue': 'var(--pale-camp-blue)',
+        "cerulean-blue": 'var(--cerulean-blue)',
+        "dusky-blue-violet": 'var(--dusky-blue-violet)',
+        "deep-cadet-blue": 'var(--deep-cadet-blue)',
+        //elements
+        'primary': 'rgb(from var(--primary)  r g b / <alpha-value>)',
+        'background' : 'rgb(from var(--background)  r g b / <alpha-value>)',
+        'border' : 'rgb(from var(--border)  r g b / <alpha-value>)',
+        'text': 'rgb(from var(--text)  r g b / <alpha-value>)',
+        'placeholder': 'rgb(from var(--placeholder-text)  r g b / <alpha-value>)',
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],

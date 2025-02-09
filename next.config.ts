@@ -1,6 +1,7 @@
-const nextConfig = {
-    // reactStrictMode: true,
-    swcMinify: true,
+import { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+    reactStrictMode: true,
     eslint: {
         ignoreDuringBuilds: true,
     }
