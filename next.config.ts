@@ -1,3 +1,4 @@
+import { withPayload } from "@payloadcms/next/withPayload";
 import { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -8,4 +9,4 @@ const nextConfig: NextConfig = {
     // Add additional Next.js configuration options here.
 };
 
-export default nextConfig;
+export default withPayload(nextConfig);
