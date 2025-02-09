@@ -13,10 +13,6 @@ interface DebateOverviewProps {
 export default function DebateOverview({ responses }: DebateOverviewProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const getAIModel = (modelId: string): AIModel | undefined => {
-    return mockAIModels.find(model => model.id === modelId);
-  };
-
   // Analyze responses to find agreements and differences
   const analyzeResponses = () => {
     const analysis = {
@@ -32,7 +28,7 @@ export default function DebateOverview({ responses }: DebateOverviewProps) {
     // Extract key points from each response
     const responseTexts = responses.map(response => {
       // const text = response.answerReceived[0]?.type === 'markdown'
-      const text = response.answerReceived[0];
+      const text = response.answerReceived;
       return {
         model: response.aiModel || 'AI Model',
         text
@@ -42,6 +38,7 @@ export default function DebateOverview({ responses }: DebateOverviewProps) {
     // Simple analysis based on common keywords and phrases
     responseTexts.forEach(response => {
       const name = typeof response.model === 'string' ? response.model : response.model.modelName;
+      // console.log(response.text);
       if (response.text.toLowerCase().includes('agree') || 
           response.text.toLowerCase().includes('likely')) {
         analysis.agreements.add(name);
@@ -57,7 +54,7 @@ export default function DebateOverview({ responses }: DebateOverviewProps) {
         analysis.uniqueInsights.add(name);
       }
     });
-
+    console.log(analysis);
     return analysis;
   };
 

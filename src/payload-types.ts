@@ -69,6 +69,10 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  fullName?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -118,8 +122,7 @@ export interface Debate {
         id?: string | null;
       }[]
     | null;
-  predictedEventDate?: string | null;
-  realOutcome?: string | null;
+  verified?: boolean | null;
   updatedAt: string;
 }
 /**
@@ -128,10 +131,14 @@ export interface Debate {
  */
 export interface AiResponse {
   id: string;
-  associatedDebate?: (string | null) | Debate;
   aiModel: string | AiModel;
   webSearchEnabled?: boolean | null;
+  /**
+   * AIs such as o3-mini, DeepSeek-R1 use thought process to generate responses.
+   */
+  thoughtProcess?: string | null;
   answerReceived: string;
+  linkToChat?: string | null;
   customTitle?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -237,6 +244,10 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  username?: T;
+  firstName?: T;
+  lastName?: T;
+  fullName?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -283,8 +294,7 @@ export interface DebatesSelect<T extends boolean = true> {
         tag?: T;
         id?: T;
       };
-  predictedEventDate?: T;
-  realOutcome?: T;
+  verified?: T;
   updatedAt?: T;
 }
 /**
@@ -310,10 +320,11 @@ export interface AiModelsSelect<T extends boolean = true> {
  * via the `definition` "ai-responses_select".
  */
 export interface AiResponsesSelect<T extends boolean = true> {
-  associatedDebate?: T;
   aiModel?: T;
   webSearchEnabled?: T;
+  thoughtProcess?: T;
   answerReceived?: T;
+  linkToChat?: T;
   customTitle?: T;
   updatedAt?: T;
   createdAt?: T;

@@ -9,16 +9,16 @@ import { ModelIcon } from '@/components/ModelIcon';
 import { Debate } from '@/payload-types';
 
 export default function DebateContent({ debate }: { debate: Debate }) {
-  const [activeResponse, setActiveResponse] = useState(mockAIResponses[0].id);
-  const [expandedResponses, setExpandedResponses] = useState<string[]>([]);
 
   const responses = debate.aiResponses;
   if (!responses)
     throw new Error('No responses found for this debate');
+  const initialResponseId = typeof responses[0] === "string" ? responses[0] : responses[0].id;
+  const [activeResponse, setActiveResponse] = useState(initialResponseId);
+  const [expandedResponses, setExpandedResponses] = useState<string[]>([]);
   // const getAIModel = (modelId: string) => {
   //   return mockAIModels.find(model => model.id === modelId);
   // };
-
   const formatTimeAgo = (dateString: string) => {
     const diff = Date.now() - new Date(dateString).getTime();
     const minutes = Math.floor(diff / 60000);
@@ -54,20 +54,22 @@ export default function DebateContent({ debate }: { debate: Debate }) {
             const model = typeof response !== "string" ? response.aiModel : "Model";
             const modelName = typeof model !== "string" ? model.modelName : model;
             const id = typeof response !== "string" ? response.id : response;
-              return(
-                <button
-                  key={id}
-                  onClick={() => setActiveResponse(id)}
-                  className={`flex items-center px-6 py-4 border-b-2 focus:outline-none transition-colors ${activeResponse === id
-                      ? 'border-primary text-primary'
-                      : 'border-transparent text-placeholder hover:text-text hover:border-border'
-                    }`}
-                >
-                  {/* <ModelIcon type={model?.iconType || 'bot'} className="w-5 h-5 mr-2" /> */}
-                  <ModelIcon type={false || 'bot'} className="w-5 h-5 mr-2" />
-                  <span className="font-medium">{modelName}</span>
-                </button>
-              );
+            return (
+              <button
+                key={id}
+                onClick={() => setActiveResponse(id)}
+                className={`flex items-center px-6 py-4 border-b-2 focus:outline-none transition-colors ${activeResponse === id
+                  ? 'border-primary text-primary'
+                  : 'border-transparent text-placeholder hover:text-text hover:border-border'
+                  }`}
+              >
+                <ModelIcon
+                  type={typeof model === "object" && model.provider.toLowerCase().replace(/\s/g, '') || 'bot'}
+                  className="w-5 h-5 mr-2" />
+                {/* <ModelIcon type={false || 'bot'} className="w-5 h-5 mr-2" /> */}
+                <span className="font-medium">{modelName}</span>
+              </button>
+            );
           })}
         </div>
       </div>
@@ -98,8 +100,8 @@ export default function DebateContent({ debate }: { debate: Debate }) {
                   <div className="flex items-center space-x-2">
                     <Globe className="w-4 h-4 text-placeholder" />
                     <span className={`text-small px-2 py-0.5 rounded-full ${isWebEnabled
-                        ? 'bg-primary/10 text-primary'
-                        : 'bg-pale-camp-blue text-placeholder'
+                      ? 'bg-primary/10 text-primary'
+                      : 'bg-pale-camp-blue text-placeholder'
                       }`}>
                       Web Search: {isWebEnabled ? 'On' : 'Off'}
                     </span>

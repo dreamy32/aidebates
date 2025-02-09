@@ -1,4 +1,25 @@
-import { CollectionConfig } from 'payload';
+import { AiResponse } from '@/payload-types';
+import { CollectionBeforeChangeHook, CollectionConfig } from 'payload';
+
+const setCustomTitle: CollectionBeforeChangeHook<AiResponse> = async ({ req, data, originalDoc }) => {
+  // Get the aiModel value from the new data or original doc.
+  const aiModelId = data.aiModel ?? originalDoc?.aiModel;
+  let aiModelName = '';
+
+  if (typeof aiModelId === 'string') {
+    // Fetch the ai-model document to get its modelName.
+    const aiModelDoc = await req.payload.findByID({
+      collection: 'ai-models',
+      id: aiModelId,
+    });
+    aiModelName = aiModelDoc?.modelName || '';
+  } else if (aiModelId && typeof aiModelId === 'object') {
+    aiModelName = aiModelId.modelName;
+  }
+  // Build the custom title as "name of the ai model" + answer.
+  data.customTitle = `${aiModelName} 🗨️`;
+  return data;
+};
 
 export const Debates: CollectionConfig = {
   slug: 'debates',
@@ -56,13 +77,15 @@ export const Debates: CollectionConfig = {
       ],
     },
     {
-      name: 'predictedEventDate',
-      type: 'date',
-    },
-    {
-      name: 'realOutcome',
-      type: 'textarea',
-    },
+      name: 'verified',
+      type: 'checkbox',
+      defaultValue: false,
+      access: {
+        create: ({ req }) => req.user?.username === 'drseek32',
+        read: ({ req }) => req.user?.username === 'drseek32',
+        update: ({ req }) => req.user?.username === 'drseek32',
+      },
+    }
   ],
 };
 
@@ -71,12 +94,10 @@ export const AIResponses: CollectionConfig = {
   admin: {
     useAsTitle: 'customTitle',
   },
+  hooks: {
+    beforeChange: [setCustomTitle],
+  },
   fields: [
-    {
-      name: 'associatedDebate',
-      type: 'relationship',
-      relationTo: 'debates',
-    },
     {
       name: 'aiModel',
       type: 'relationship',
@@ -88,40 +109,29 @@ export const AIResponses: CollectionConfig = {
       type: 'checkbox',
       defaultValue: false,
     },
-    // {
-    //   name: 'temperature',
-    //   type: 'number',
-    //   required: true,
-    //   min: 0,
-    //   max: 1,
-    // },
-    // {
-    //   name: 'dateOfResponse',
-    //   type: 'date',
-    //   required: true,
-    // },
+    {
+      name: 'thoughtProcess',
+      type: 'textarea',
+      admin: {
+        description: 'AIs such as o3-mini, DeepSeek-R1 use thought process to generate responses.',
+      },
+    },
     {
       name: 'answerReceived',
       type: 'textarea',
       required: true,
     },
     {
-        name: 'customTitle',
-        type: 'text',
-        admin: {
-          hidden: true, // This field is computed and should not be manually edited
-        },
-        hooks: {
-          beforeChange: [
-            ({ data }) => {
-              if (data?.aiModel) {
-                return `${data.aiModel} response`; // Dynamically set the title
-              }
-              return 'AI Response';
-            },
-          ],
-        },
+      name: 'linkToChat',
+      type: 'text',
+    },
+    {
+      name: 'customTitle',
+      type: 'text',
+      admin: {
+        hidden: true,
       },
+    },
   ],
 };
 

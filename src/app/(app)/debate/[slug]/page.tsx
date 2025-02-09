@@ -11,8 +11,8 @@ import payloadConfig from '@/payload.config';
 interface params {
   params: Promise<{ slug: string }>;
 }
-export default async  function DebatePage({ params }: params) {
-  const {slug} = await params;
+export default async function DebatePage({ params }: params) {
+  const { slug } = await params;
 
 
   // const responses = mockAIResponses.filter(response =>
@@ -20,22 +20,22 @@ export default async  function DebatePage({ params }: params) {
   // );
 
   // const getUser = (userId: string) => {
-    //   return mockUsers.find(user => user.id === userId);
-    // };
-    const payload = await getPayload({ config: payloadConfig })
-    const getDebate = (await payload.find({
-      collection: 'debates',
-      limit: 1,
-      where: {
-        slug: {
-          equals: slug
-        }
+  //   return mockUsers.find(user => user.id === userId);
+  // };
+  const payload = await getPayload({ config: payloadConfig })
+  const getDebate = (await payload.find({
+    collection: 'debates',
+    limit: 1,
+    where: {
+      slug: {
+        equals: slug
       }
-    })).docs[0];
-    const debate = getDebate;
-    if (!debate) {
-      notFound();
     }
+  })).docs[0];
+  const debate = getDebate;
+  if (!debate) {
+    notFound();
+  }
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -43,7 +43,7 @@ export default async  function DebatePage({ params }: params) {
       day: 'numeric'
     });
   };
-
+  const USER = debate.createdBy;
   return (
     <div className="min-h-screen">
       {/* Main Content */}
@@ -73,8 +73,7 @@ export default async  function DebatePage({ params }: params) {
               {/* Creator */}
               <DetailItem
                 icon={<User className="w-4 h-4 sm:w-5 sm:h-5" />}
-                // title={`${getUser(debate.createdBy)?.firstName} ${getUser(debate.createdBy)?.lastName}`}
-                title='uh'
+                title={typeof USER === 'object' && USER.username ? '@' + USER.username : 'Unknown User'}
                 subtitle="Creator"
               />
 
@@ -95,7 +94,7 @@ export default async  function DebatePage({ params }: params) {
                   {debate.tags && debate.tags.map((tag, index) => (
                     <span
                       key={index}
-                      className="inline-flex items-center px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-small font-medium bg-primary/10 text-primary border border-primary/30"
+                      className="capitalize inline-flex items-center px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-small font-medium bg-primary/10 text-primary border border-primary/30"
                     >
                       {tag.tag}
                     </span>
@@ -104,11 +103,19 @@ export default async  function DebatePage({ params }: params) {
               </div>
 
               {/* Predicted Event Date */}
-              <DetailItem
+              {/* <DetailItem
                 icon={<Calendar className="w-4 h-4 sm:w-5 sm:h-5" />}
                 title={formatDate(debate.predictedEventDate || '')}
                 subtitle="Predicted Event Date"
-              />
+              /> */}
+
+              {/* Verified Debate by moderation */}
+              {debate.verified &&
+                <DetailItem
+                  icon={<Info className="w-4 h-4 sm:w-5 sm:h-5" />}
+                  title="Verified Debate"
+                  subtitle="Verified by Moderation"
+                />}
             </div>
           </div>
         </div>
