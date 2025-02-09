@@ -66,9 +66,9 @@ export default function DebateContent({ debate }: { debate: Debate }) {
               >
                 <ModelIcon
                   type={typeof model === "object" && model.provider.toLowerCase().replace(/\s/g, '') || 'bot'}
-                  className="w-5 h-5 mr-2" />
+                  className="w-5 h-5 max-md:w-4 max-md:h-4 mr-2" />
                 {/* <ModelIcon type={false || 'bot'} className="w-5 h-5 mr-2" /> */}
-                <span className="font-medium truncate max-w-[15ch]">{modelName}</span>
+                <span className="font-medium truncate max-w-[15ch] max-md:max-w-[13ch] max-md:text-sm">{modelName}</span>
               </button>
             );
           })}
@@ -96,8 +96,8 @@ export default function DebateContent({ debate }: { debate: Debate }) {
             >
               {/* Response Header */}
               <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-4">
-                  <span className="font-semibold text-primary">{modelName}</span>
+                <div className="flex items-center md:space-x-4">
+                  <span className="font-semibold text-primary max-md:hidden">{modelName}</span>
                   <div className="flex items-center space-x-2">
                     <Globe className="w-4 h-4 text-placeholder" />
                     <span className={`text-small px-2 py-0.5 rounded-full ${isWebEnabled
@@ -114,7 +114,7 @@ export default function DebateContent({ debate }: { debate: Debate }) {
                   title="Copy response"
                 >
                   <Copy className="w-4 h-4" />
-                  <span className="text-small font-medium">Copy</span>
+                  <span className="text-small max-md:text-xs font-medium">Copy</span>
                 </button>
               </div>
 
