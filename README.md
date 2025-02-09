@@ -5,7 +5,7 @@ A platform for comparing responses from different large language models (LLMs) o
 <div align="center">
   <a href="https://github.com/dreamy32/aidebates/stargazers"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/dreamy32/aidebates"></a>
   <a href="https://twitter.com/dreamy32"><img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/dreamy32"></a>
-  <a href="https://github.com/dreamy32/aidebates/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/License-MIT-yellow.svg"></a>
+  <a href="https://github.com/dreamy32/aidebates/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/License-CC%20BY--NC--ND-yellow"></a>
 </div>
 
 ## ⚡ Live
@@ -43,6 +43,6 @@ Contributions are welcome! Visit our [contributing guide](https://github.com/dre
 
 ## 📜 License
 
-This project is licensed under the MIT License. For more details, see the [LICENSE](./LICENSE) file.
+This project is licensed under the **Creative Commons Attribution-NonCommercial-NoDerivatives (CC BY-NC-ND)** license. For more details, see the [LICENSE](./LICENSE) file.
 
 Check out the [Next.js GitHub repository](https://github.com/vercel/next.js/) for framework-related documentation.
