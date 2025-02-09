@@ -1,5 +1,5 @@
 import { Bot, Calendar, Tag, User, Search, Home, BookOpen, Info } from 'lucide-react';
-import { mockDebates, mockUsers, mockAIResponses } from '@/lib/mockData';
+// import { mockDebates, mockUsers, mockAIResponses } from '@/lib/mockData';
 import DebateContent from '@/components/DebateContent';
 import DebateOverview from '@/components/DebateOverview';
 import NavLink from '@/components/NavLink';
@@ -7,6 +7,7 @@ import DetailItem from '@/components/DetailItem';
 import { notFound } from 'next/navigation';
 import { getPayload } from 'payload';
 import payloadConfig from '@/payload.config';
+import { AiResponse } from '@/payload-types';
 
 interface params {
   params: Promise<{ slug: string }>;
@@ -60,7 +61,7 @@ export default async function DebatePage({ params }: params) {
             </div>
 
             {/* Global Overview */}
-            {debate.aiResponses && <DebateOverview responses={(debate.aiResponses).filter(response => typeof response !== 'string')} />}
+            {debate.aiResponses && <DebateOverview responses={(debate.aiResponses).filter(response => typeof response !== 'string') as AiResponse[]} />}
             {/* AI Response Section */}
             {debate.aiResponses && <DebateContent debate={debate} />}
           </div>

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Copy, ChevronDown, ChevronUp, Globe, ThumbsUp, ThumbsDown } from 'lucide-react';
-import { mockAIResponses, mockAIModels } from '@/lib/mockData';
+// import { mockAIResponses, mockAIModels } from '@/lib/mockData';
 import { ModelIcon } from '@/components/ModelIcon';
 import { Debate } from '@/payload-types';
 

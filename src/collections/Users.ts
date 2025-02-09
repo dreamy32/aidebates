@@ -7,6 +7,9 @@ export const Users: CollectionConfig = {
     defaultColumns: ['fullName', 'username', 'email'],
   },
   auth: true,
+  access: {
+    create: () => false, // Disable user creation | Will be enabled when support is made
+  },
   fields: [
     // Email added by default
     // Add more fields as needed

@@ -1,5 +1,5 @@
 import { Bot, Calendar, Tag, User, Search } from 'lucide-react';
-import { mockDebates, mockUsers } from '@/lib/mockData';
+// import { mockDebates, mockUsers } from '@/lib/mockData';
 import Link from 'next/link';
 import payloadConfig from '@/payload.config';
 import { getPayload } from 'payload';

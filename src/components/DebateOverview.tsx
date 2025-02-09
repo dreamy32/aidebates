@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronUp, Bot, Lightbulb } from 'lucide-react';
 import type { AIModel } from '@/lib/types';
-import { mockAIModels } from '@/lib/mockData';
+// import { mockAIModels } from '@/lib/mockData';
 import { AiResponse } from '@/payload-types';
 
 interface DebateOverviewProps {
