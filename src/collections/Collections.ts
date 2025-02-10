@@ -23,15 +23,17 @@ const setCustomTitle: CollectionBeforeChangeHook<AiResponse> = async ({ req, dat
 };
 
 const revalidateOnChange: CollectionAfterChangeHook<Debate> = async ({
-  doc
-}) => { 
-  // revalidatePath(`/debate/${doc.slug}`);
+  doc, previousDoc
+}) => {
+  if (previousDoc) revalidatePath(`/debate/${previousDoc.slug}`);
+  revalidatePath(`/debate/${doc.slug}`);
   revalidatePath('/debates');
 }
 
 const revalidateOnDelete: CollectionAfterDeleteHook<Debate> = async ({
   doc
-}) => { 
+}) => {
+  revalidatePath(`/debate/${doc.slug}`);
   revalidatePath('/debates');
 }
 
