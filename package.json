@@ -14,6 +14,7 @@
     "@payloadcms/next": "^3.22.0",
     "@payloadcms/payload-cloud": "^3.22.0",
     "@payloadcms/richtext-lexical": "^3.22.0",
+    "@vercel/analytics": "^1.5.0",
     "graphql": "^16.8.1",
     "lucide-react": "0.344.0",
     "next": "^15.1.6",

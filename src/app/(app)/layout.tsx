@@ -5,6 +5,7 @@ import NavLink from '@/components/NavLink';
 import './globals.css';
 import { ThemeProvider } from 'next-themes';
 import ThemeToggle from '@/components/ThemeToggle';
+import { Analytics } from '@vercel/analytics/next';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,8 +22,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-      <ThemeProvider attribute="class" enableSystem={false} >
-      {/* Navbar */}
+        <ThemeProvider attribute="class" enableSystem={false} >
+          {/* Navbar */}
           <nav className="fixed top-0 left-0 right-0 bg-background border-b border-border z-50">
             <div className="max-w-content mx-auto px-6 h-18">
               <div className="flex items-center justify-between h-full">
@@ -79,6 +80,7 @@ export default function RootLayout({
             </div>
           </footer>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
