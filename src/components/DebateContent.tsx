@@ -126,14 +126,14 @@ export default function DebateContent({ debate }: { debate: Debate }) {
                       remarkPlugins={[remarkGfm]}
                       className="prose prose-blue max-w-none text-text"
                       components={{
-                        h1: ({ node, ...props }) => <h1 className="text-2xl font-bold mt-6 mb-4 " {...props} />,
-                        h2: ({ node, ...props }) => <h2 className="text-xl font-bold mt-5 mb-3" {...props} />,
-                        h3: ({ node, ...props }) => <h3 className="text-lg font-bold mt-4 mb-2" {...props} />,
-                        p: ({ node, ...props }) => <p className="mb-4" {...props} />,
-                        ul: ({ node, ...props }) => <ul className="list-disc pl-6 mb-4" {...props} />,
-                        ol: ({ node, ...props }) => <ol className="list-decimal pl-6 mb-4" {...props} />,
-                        li: ({ node, ...props }) => <li className="mb-2" {...props} />,
-                        hr: ({ node, ...props }) => <hr className="my-6 border-border" {...props} />,
+                        h1: ({ node, ...props }) => <h1 className="text-2xl font-bold mt-6 mb-4 text-text" {...props} />,
+                        h2: ({ node, ...props }) => <h2 className="text-xl font-bold mt-5 mb-3 text-text" {...props} />,
+                        h3: ({ node, ...props }) => <h3 className="text-lg font-bold mt-4 mb-2 text-text" {...props} />,
+                        p: ({ node, ...props }) => <p className="mb-4 text-text" {...props} />,
+                        ul: ({ node, ...props }) => <ul className="list-disc pl-6 mb-4 text-text" {...props} />,
+                        ol: ({ node, ...props }) => <ol className="list-decimal pl-6 mb-4 text-text" {...props} />,
+                        li: ({ node, ...props }) => <li className="mb-2 text-text" {...props} />,
+                        hr: ({ node, ...props }) => <hr className="my-6 border-border text-text" {...props} />,
                         blockquote: ({ node, ...props }) => (
                           <blockquote className="border-l-4 border-primary pl-4 my-4 text-placeholder" {...props} />
                         ),
