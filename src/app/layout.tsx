@@ -78,8 +78,8 @@ export default function RootLayout({
               </div>
             </div>
           </footer>
-        </ThemeProvider>
         <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   );
