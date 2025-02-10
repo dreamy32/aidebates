@@ -133,7 +133,7 @@ export default function DebateContent({ debate }: { debate: Debate }) {
                         ul: ({ node, ...props }) => <ul className="list-disc pl-6 mb-4 text-text" {...props} />,
                         ol: ({ node, ...props }) => <ol className="list-decimal pl-6 mb-4 text-text" {...props} />,
                         li: ({ node, ...props }) => <li className="mb-2 text-text" {...props} />,
-                        hr: ({ node, ...props }) => <hr className="my-6 border-border text-text" {...props} />,
+                        hr: ({ node, ...props }) => <hr className="my-6 border-border" {...props} />,
                         blockquote: ({ node, ...props }) => (
                           <blockquote className="border-l-4 border-primary pl-4 my-4 text-placeholder" {...props} />
                         ),
