@@ -9,22 +9,17 @@ import { getPayload } from 'payload';
 import payloadConfig from '@/payload.config';
 import { AiResponse } from '@/payload-types';
 
+
 interface params {
   params: Promise<{ slug: string }>;
 }
+
 export default async function DebatePage({ params }: params) {
   const { slug } = await params;
 
+  const payload = await getPayload({ config: payloadConfig });
 
-  // const responses = mockAIResponses.filter(response =>
-  //   debate.aiResponses.includes(response.id)
-  // );
-
-  // const getUser = (userId: string) => {
-  //   return mockUsers.find(user => user.id === userId);
-  // };
-  const payload = await getPayload({ config: payloadConfig })
-  const getDebate = (await payload.find({
+  const debate = (await payload.find({
     collection: 'debates',
     limit: 1,
     where: {
@@ -33,7 +28,7 @@ export default async function DebatePage({ params }: params) {
       }
     }
   })).docs[0];
-  const debate = getDebate;
+
   if (!debate) {
     notFound();
   }
@@ -124,3 +119,16 @@ export default async function DebatePage({ params }: params) {
     </div>
   );
 }
+
+export const generateStaticParams = async () => {
+  const payload = await getPayload({ config: payloadConfig });
+  // This runs separately at build time to generate a list of IDs
+  const debates = (await payload.find({
+    collection: 'debates',
+    limit: 0,
+    depth: 1,
+  })).docs;
+  return debates.map((d) => ({
+    slug: d.slug,
+  }));
+};
