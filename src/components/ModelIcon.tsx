@@ -1,5 +1,5 @@
 import { Bot } from 'lucide-react';
-import { SiOpenai, SiClaude, SiGooglegemini } from "react-icons/si";
+import { SiOpenai, SiClaude, SiGooglegemini, SiMeta } from "react-icons/si";
 import { DeepseekIcon, QwenIcon } from '@/components/icons';
 
 export type ModelIconType = 'openai' | 'anthropic' | 'bot' | 'deepseek' | 'qwen';
@@ -23,7 +23,11 @@ export function ModelIcon({ type, className = "w-5 h-5" }: ModelIconProps) {
     case 'google':
     case 'gemini':
     case 'deepmind':
-      return <SiGooglegemini className={className}/>
+      return <SiGooglegemini className={className} />
+    case 'meta':
+    case 'facebook':
+    case 'llama':
+      return <SiMeta className={className} />
     case 'bot':
     default:
       return <Bot className={className} />;
